@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Link, Switch, Route, BrowserRouter} from 'react-router-dom'
-import logo from './logo.svg';
 import './App.css';
-import Details from '../src/components/details';
 import Home from '../src/components/home';
 import Donor from '../src/components/donor';
 import Recepient from '../src/components/recepient';
+import Items from '../src/components/items/items';
 
 class App extends Component {
   render() {  
@@ -21,13 +20,13 @@ class App extends Component {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/donor-flow">Donor flow</Link></li>
                 <li><Link to="/recepient-flow">Recepient flow</Link></li>
-                <li><Link to="/details-page">Details page</Link></li>
+                <li><Link to="/items">Items List</Link></li>
               </ul>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/donor-flow" component={Donor} />
                 <Route exact path="/recepient-flow" component={Recepient} />
-                <Route exact path="/details-page" component={Details} />
+                <Route exact path="/items" component={Items} />
               </Switch>
             </div>
           </BrowserRouter>
