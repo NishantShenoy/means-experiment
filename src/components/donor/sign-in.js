@@ -14,25 +14,27 @@ export default class SignIn extends React.Component {
 
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
-        this.restoreUnchangedStateVariables = this.restoreUnchangedStateVariables.bind(this);
+    }
+
+    handleRedirect = (context) => {
+        var redirect = context.validateEmail(this.state.email);
+        if (redirect) {
+            this.props.history.push('/donate-food-form')
+        }
     }
 
     setEmail = (event) => {
         if (event) {
-            let newStateVariable = {email: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
+            let newStateVariable = Object.assign(this.state, {email: event.target.value});
+            this.setState(newStateVariable);
         }
     }
     setPassword = (event) => {
         if (event) {
-            let newStateVariable = {password: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
+            let newStateVariable = Object.assign(this.state,{password: event.target.value});
+            this.setState(newStateVariable);
         }
     }
-    restoreUnchangedStateVariables = (previousState, newStateVariable) => {
-        this.state = {...previousState, ...newStateVariable};
-    }
-
 
     render() {
         return (
@@ -49,11 +51,8 @@ export default class SignIn extends React.Component {
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.setPassword}/>
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={context.validateEmail(this.state)}>Sign in</button>
+                        <button type="submit" className="btn btn-primary" onClick={this.handleRedirect.call(this,context)}>Sign in</button>
                     </form>
-                    {context.state.isValidatedEmail ? 
-                        (<Redirect to="/donate-food-form" />): (<Error />)                     
-                    }
                 </React.Fragment>
             )}
             </DonorSignInContext.Consumer>

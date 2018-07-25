@@ -2,8 +2,37 @@ import React from 'react'
 
 export const DonorSignInContext = React.createContext();
 
-export default class MyDonorContextProvider extends React.Component {
+class MyDonorContextProvider extends React.Component {
     
+    state = {
+        organizationName:'',
+        donorEmail: '',
+        password: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: 'WA',
+        zip: '',
+        isNonProfit: false,
+        EIN:'',
+        isValidatedEmail: false,
+        isValidatedEIN: false,
+        isValidEIN: false,
+        CreditCardNumber: '',
+        CVV:'',
+        donationDetails: {
+            title: '',
+            description: '',
+            autoFoodClassifications: [],
+            additionalFoodClassifications: [],
+            pickupLocation: '',
+            foodExpiry: '',
+            fairMarketValue: '',
+            donationGrossWeight: ''
+        }
+    }
+
+
     constructor(props) {
         super(props)
         this.state = {
@@ -19,137 +48,100 @@ export default class MyDonorContextProvider extends React.Component {
             EIN:'',
             isValidatedEmail: false,
             isValidatedEIN: false,
+            isValidEIN: false,
             CreditCardNumber: '',
-            CVV:''
+            CVV:'',
+            donationDetails: {
+                title: '',
+                description: '',
+                autoFoodClassifications: [],
+                additionalFoodClassifications: [],
+                pickupLocation: '',
+                foodExpiry: '',
+                fairMarketValue: '',
+                donationGrossWeight: ''
+            }
         }
-
-        // this.handleInputChange = this.handleOrgNameChange.bind(this);
-        // this.handleDonorEmailChange = this.handleDonorEmailChange.bind(this);
-        // this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        // this.handleAddressLine1Change = this.handleAddressLine1Change.bind(this);
-        // this.handleAddressLine2Change = this.handleAddressLine2Change.bind(this);
-        // this.handleCityChange = this.handleCityChange.bind(this);
-        // this.handleStateChange = this.handleStateChange.bind(this);
-        // this.handleZipChange = this.handleZipChange.bind(this);
-        // this.handleIsNonProfitChange = this.handleIsNonProfitChange.bind(this);
-        // this.handleEINChange = this.handleEINChange.bind(this);
-        // this.handleCCNumberChange = this.handleCCNumberChange.bind(this);
-        // this.handleCVVChange = this.handleCVVChange.bind(this);
-        // this.restoreUnchangedStateVariables = this.restoreUnchangedStateVariables.bind(this);
-        // this.validateEmail = this.validateEmail.bind(this);
-        // this.validateEIN = this.validateEIN.bind(this);
     }
     
-
-    handleOrgNameChange = (event) => {
-        if (event) {
-            let newStateVariable = {organizationName: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleDonorEmailChange = (event) => {
-        if (event) {
-            let newStateVariable = {donorEmail: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handlePasswordChange = (event) => {
-        if (event) {
-            let newStateVariable = {password: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleAddressLine1Change = (event) => {
-        if (event) {
-            let newStateVariable = {addressLine1: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleAddressLine2Change = (event) => {
-        if (event) {
-            let newStateVariable = {addressLine2: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleCityChange = (event) => {
-        if (event) {
-            let newStateVariable = {city: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleStateChange = (event) => {
-        if (event) {
-            let newStateVariable = {state: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleZipChange = (event) => {
-        if (event) {
-            let newStateVariable = {zip: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleIsNonProfitChange = (event) =>{
-        if (event) {
-            let newStateVariable = {isNonProfit: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleEINChange = (event) => {
-        if (event) {
-            let newStateVariable = {EIN: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleCCNumberChange = (event) => {
-        if (event) {
-            let newStateVariable = {CreditCardNumber: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    handleCVVChange = (event) => {
-        if (event) {
-            let newStateVariable = {CVV: event.target.value};
-            this.restoreUnchangedStateVariables(this.state, newStateVariable)
-        }
-    }
-    validateEIN = () => {
-        if (this.state.EIN) {
-            //verify creds
-            this.state.isValidatedEIN = true;
-        }
-    }
-    validateEmail = (creds) => {
-        if (creds) {
-            //verify creds
-            this.state.isValidatedEmail = true;
-        }
-    }
-
-    restoreUnchangedStateVariables = (previousState, newStateVariable) => {
-        this.state = {...previousState, ...newStateVariable};
-    }
-
     render(){
+        var self=this;
         return(
             <DonorSignInContext.Provider value = {{
                 state: this.state,
-                handleOrgNameChange : this.handleOrgNameChange,
-                handleDonorEmailChange : this.handleDonorEmailChange,
-                handlePasswordChange : this.handlePasswordChange,
-                handleAddressLine1Change : this.handleAddressLine1Change,
-                handleAddressLine2Change : this.handleAddressLine2Change,
-                handleStateChange : this.handleStateChange,
-                handleZipChange : this.handleZipChange,
-                handleIsNonProfitChange : this.handleIsNonProfitChange,
-                handleEINChange : this.handleEINChange,
-                handleCCNumberChange : this.handleCCNumberChange,
-                handleCVVChange : this.handleCVVChange,
-                validateEIN: this.validateEIN,
-                validateEmail: this.validateEmail
+                handleOrgNameChange : (event) => {
+                    let newState = Object.assign(self.state, {organizationName: event.target.value});
+                    self.setState(newState);
+                },
+                handleDonorEmailChange : (event) => {
+                    let newState = Object.assign(self.state, {donorEmail: event.target.value});
+                    self.setState(newState)
+                },
+                handlePasswordChange : (event) => {
+                    let newState = Object.assign(self.state, {password: event.target.value});
+                    self.setState(newState)
+                },
+                handleAddressLine1Change : (event) => {
+                    let newState = Object.assign(self.state,  {password: event.target.value});
+                    self.setState(newState)
+                },
+                handleAddressLine2Change : (event) => {
+                    let newState = Object.assign(self.state,  {addressLine2: event.target.value});
+                    self.setState(newState)
+                },
+                handleStateChange : (event) => {
+                    let newState = Object.assign(self.state,   {state: event.target.value});
+                    self.setState(newState)
+                },
+                handleStateChange : (event) => {
+                    let newState = Object.assign(self.state, {city: event.target.value});
+                    self.setState(newState)
+                },
+                handleZipChange : (event) => {
+                    let newState = Object.assign(self.state,   {zip: event.target.value});
+                    self.setState(newState)
+                },
+                handleIsNonProfitChange : (event) => {
+                    let newState = Object.assign(self.state,   {isNonProfit: event.target.value});
+                    self.setState(newState)
+                },
+                handleEINChange : (EIN) => {
+                    let newState = Object.assign(self.state,   {EIN: EIN});
+                    self.setState(newState)
+                },
+                handleCCNumberChange : (CCNumber) => {
+                    let newState = Object.assign(self.state,   {CreditCardNumber: CCNumber});
+                    self.setState(newState)
+                },
+                handleCVVChange :  (CVV) => {
+                    let newState = Object.assign(self.state,  {CVV: CVV});
+                    self.setState(newState)
+                },
+                validateEIN :(EIN) => {
+                    if (EIN) {
+                        //verify creds
+                        self.state.isValidatedEIN = true;
+                        self.state.isValidEIN = true;
+                        return true;
+                    }
+                },
+                validateEmail:  (creds) => {
+                    if (creds) {
+                        //verify creds
+                        self.state.isValidatedEmail = true;
+                    }
+                },
+                setDonationDetails: (donation) => {
+                    if(donation) {
+                        self.state.donationDetails = donation;
+                    }
+                }
             }}>
-            {this.props.children}
+            {self.props.children}
             </DonorSignInContext.Provider>
         )
     }
 }
+
+
+export default MyDonorContextProvider

@@ -12,7 +12,7 @@ export default class SignUp extends React.Component {
         return (
             <form>
             <DonorSignInContext.Consumer>
-                { (context) => (
+                {(context) => (
                     <React.Fragment>
                         <div className="form-group">
                                 <label for="orgNameInput">Organization Name</label>
