@@ -22,7 +22,7 @@ class Item extends React.Component {
         return (
             <div className='list-group-item active'>
                 <div class="thumbnail">
-                    <img src={this.props.donationInfo.item_image} className="img-fluid" alt="Picture not available"/>
+                    <img src={this.props.donationInfo.item_image} className="img-fluid" alt=""/>
                     <div class="caption">
                         <h3 className="list-group-item-text">{this.props.donationInfo.title} 
                             <span className="badge badge-secondary">{this.props.donationInfo.status}</span>

@@ -11,7 +11,7 @@ class Items extends React.Component {
         return (
             <div className='list-group'>
             {[
-                ...Donations.map((donation) => 
+                ...(this.props.donations||Donations).map((donation) => 
                     (<Item donationInfo={donation} authorizedToClaim={this.defaults.authorizedToClaim}/>)            
                 )
             ]}
