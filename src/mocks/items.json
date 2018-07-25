@@ -2,7 +2,7 @@
     {
         "id": 3,
         "user": "user2",
-        "title": "Protein A Only Item Fixture 1st",
+        "title": "Baked pizza's, thin crust, 20 pieces",
         "description": "Test Item - protein only, D.C. posted by user 1",
         "value": 0.0,
         "category": "protein",
@@ -18,7 +18,7 @@
         "status": "posted",
         "wholesome_food": true,
         "slug": "Protein Only Item Fixture Washington District of Columbia",
-        "item_image": "https://www.bing.com/images/search?view=detailV2&ccid=zfBj%2bM9V&id=B11D9DD57AAD26FC000F170B50232D99A831027A&thid=OIP.zfBj-M9V8JXipjv-RhSV3wAAAA&mediaurl=https%3a%2f%2fbookindiatour.files.wordpress.com%2f2012%2f09%2fsouth-indian-cuisine.jpg&exph=148&expw=198&q=food+images&simid=608004326036999391&selectedIndex=4&qft=+filterui%3aimagesize-small",
+        "item_image": "http://zacharys.com/wp-content/uploads/2014/04/PizzaThinTomBasil_12.jpg",
         "address": {
             "id": 5,
             "street_address_1": "425 L St. NW",
@@ -46,7 +46,7 @@
     {
         "id": 2,
         "user": "user2",
-        "title": "Protein Only Item Fixture 2nd",
+        "title": "Pasta salad, can serve 4 people",
         "description": "Test Item - protein only, D.C. posted by user 2",
         "value": 0.0,
         "category": "protein",
@@ -61,6 +61,7 @@
         "use_priority_list": false,
         "status":"claimed",
         "wholesome_food": true,
+        "item_image": "https://cookingwithcurls.com/wp-content/uploads/2013/06/Italian-Pasta-Salad-Mixed-WM.jpg",
         "slug": "Protein Only Item Fixture Washington District of Columbia",
         "address": {
             "id": 6,
@@ -89,7 +90,7 @@
     {
         "id": 3,
         "user": "user2",
-        "title": "Protein Only Item Fixture 3nd super 44",
+        "title": "50 cans of food",
         "description": "Test Item - protein only, D.C. posted by user 2",
         "value": 0.0,
         "category": "protein",
@@ -104,6 +105,7 @@
         "use_priority_list": false,
         "status": "expired",
         "wholesome_food": true,
+        "item_image": "http://survival-mastery.com/wp-content/uploads/2015/02/Canned-food.jpg",
         "slug": "Protein Only Item Fixture Washington District of Columbia",
         "address": {
             "id": 5,

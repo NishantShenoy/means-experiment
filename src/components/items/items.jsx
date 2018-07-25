@@ -4,7 +4,7 @@ import Item from './item';
 
 class Items extends React.Component {
     defaults = {
-        authorizedToClaim: false
+        authorizedToClaim: this.props.authorizedToClaim || false
     }
 
     render() {
