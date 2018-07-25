@@ -1,5 +1,6 @@
 import React from 'react';
 import {DonorSignInContext} from './donor-context-provider';
+import Clarifai from 'clarifai';
 
 export default class DonationForm extends React.Component {
 
@@ -8,7 +9,7 @@ export default class DonationForm extends React.Component {
     canvas = null;
     photo = null;
     startbutton = null;
-    width = 320;    // We will scale the photo width to this
+    width = 544;    // We will scale the photo width to this
     height = 0;     // This will be computed based on the input stream
     streaming = false;
 
@@ -72,7 +73,6 @@ export default class DonationForm extends React.Component {
               }
             );
     
-            console.log(video)
             video.addEventListener('canplay', (ev) => {
               if (!streaming) {
                 height = video.videoHeight / (video.videoWidth/width);
@@ -83,7 +83,7 @@ export default class DonationForm extends React.Component {
                 if (isNaN(height)) {
                   height = width / (4/3);
                 }
-              
+        
                 video.setAttribute('width', width);
                 video.setAttribute('height', height);
                 canvas.setAttribute('width', width);
@@ -102,7 +102,6 @@ export default class DonationForm extends React.Component {
                 
                   var data = canvas.toDataURL('image/jpeg');
                   photo.setAttribute('src', data);
-                  console.log(data)
                 } else {
                     var context = canvas.getContext('2d');
                     context.fillStyle = "#AAA";
@@ -110,8 +109,21 @@ export default class DonationForm extends React.Component {
                 
                     var data = canvas.toDataURL('image/jpeg');
                     photo.setAttribute('src', data);
-                    console.log(data)
                 }
+
+                var app = new Clarifai.App({
+                    apiKey: '2b6ebba0a71f45e5a482cff670ef708e'
+                });
+
+                var imageData = data.toString().replace('data:image/jpeg;base64,','');
+                app.models.predict(Clarifai.FOOD_MODEL, {base64: imageData})
+                    .then((response) => {
+                        try {
+                            console.log(JSON.stringify(response, null, 2));
+                          } catch (e) {
+                            console.log(e);
+                          }    
+                });
               ev.preventDefault();
             }, false);
         }
@@ -126,19 +138,9 @@ export default class DonationForm extends React.Component {
         let newState = Object.assign(this.state, {description: event.target.value});
         this.setState(newState);
     }
-
     setFoodExpiry = (event) => {
-        console.log(event);
-        let foodExpiryRadios = document.getElementsByClassName('foodexpiryradio');
-        // if(foodExpiryRadios) {
-        //     console.log(foodExpiryRadios);
-        //     for(var i=0; i<foodExpiryRadios.length;i++ ) {
-        //         if(foodExpiryRadios.length[i].checked) {
-        //             let newState = Object.assign(this.state, {foodExpiry: foodExpiryRadios.length[i]});
-        //             this.setState(newState);
-        //         }
-        //     }
-        // }
+        let newState = Object.assign(this.state, {foodExpiry: event.target.id});
+        this.setState(newState);
     }
     handleDonationEstimatedMarketValue = (event) => {
         let newState = Object.assign(this.state, {fairMarketValue: event.target.value});
@@ -148,10 +150,10 @@ export default class DonationForm extends React.Component {
         let newState = Object.assign(this.state, {donationGrossWeight: event.target.value});
         this.setState(newState);
     }
-
     donateNow = (context) => {
         context.setDonationDetails(this.state);
     }
+
 
 
     render() {
@@ -195,12 +197,12 @@ export default class DonationForm extends React.Component {
                                 <div className="well">
                                     <label for="foodExpiry">Food Expiry</label>
                                     <div>
-                                        <input type="radio" id="shelfStable" name="foodExpiry" className="foodexpiryradio" onClick={this.setFoodExpiry.call(this)} checked />
+                                        <input type="radio" id="shelfStable" name="foodExpiry" className="foodexpiryradio" onClick={this.setFoodExpiry.bind(this)} checked />
                                         <label for="shelfStable">Shelf Stable</label>
                                     </div>
 
                                     <div>
-                                        <input type="radio" id="timeSensitive" className="foodexpiryradio" name="foodExpiry" onClick={this.setFoodExpiry.call(this)} />
+                                        <input type="radio" id="timeSensitive" className="foodexpiryradio" name="foodExpiry" onClick={this.setFoodExpiry.bind(this)} />
                                         <label for="timeSensitive">Time Sensitive</label>
                                     </div>
                                 </div>
@@ -256,7 +258,7 @@ export default class DonationForm extends React.Component {
                                     <input type="text" className="form-control" placeholder="5 lbs" onChange={this.handleDonationGrossWeight} required />
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary" onClick={this.donateNow.call(this,context)}>Donate Now</button>
+                            <button type="submit" className="btn btn-primary" onClick={this.donateNow.bind(this,context)}>Donate Now</button>
                         </React.Fragment>
                     )}
                 </DonorSignInContext.Consumer>
