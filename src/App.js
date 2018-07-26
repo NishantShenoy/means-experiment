@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Link, Switch, Route, BrowserRouter} from 'react-router-dom'
-import logo from './logo.svg';
 import './App.css';
 import Details from './components/details';
 import Home from './components/home';
@@ -9,6 +8,7 @@ import Recepient from './components/recepient';
 import DonorAdditionalSignInInfo from './components/donor/additional-sign-up-info';
 import DonationForm from './components/donor/donation-form';
 import MyDonorContextProvider from './components/donor/donor-context-provider';
+import Items from '../src/components/items/items';
 
 class App extends Component {
   render() {  
@@ -29,6 +29,7 @@ class App extends Component {
                   <li><Link to="/donor-flow">Donor flow</Link></li>
                   <li><Link to="/recepient-flow">Recepient flow</Link></li>
                   <li><Link to="/details-page">Details page</Link></li>
+                  <li><Link to="/items">Items List</Link></li>
                 </ul>
                 <Switch>
                   <Route exact path="/" component={Home} />
@@ -37,6 +38,7 @@ class App extends Component {
                   <Route exact path="/details-page" component={Details} />
                   <Route exact path="/additional-signin-info" component={DonorAdditionalSignInInfo} />
                   <Route exact path="/donate-food-form" component={DonationForm} />
+                  <Route exact path="/items" component={Items} />
                 </Switch>
               </div>
             </BrowserRouter>
